@@ -25,7 +25,6 @@ app.get("/", (request, response) => {
   });
 });
 
-const port = process.env.APPPORT || 4199;
-app.listen(port, () => {
+app.listen(4100, () => {
   console.log(`App running on port ${port}.`);
 });
