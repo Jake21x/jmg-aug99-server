@@ -1,4 +1,5 @@
 var format = require("pg-format");
+
 const Pool = require("pg").Pool;
 const pool = new Pool({
   user: process.env.User,
@@ -6,8 +7,10 @@ const pool = new Pool({
   database: process.env.Database,
   password: process.env.Password,
   port: process.env.Port,
+  ssl: false,
 });
 
+pool.connect();
 var CryptoJS = require("crypto-js");
 
 const getWorkers = (request, response) => {
