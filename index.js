@@ -16,7 +16,6 @@ var CryptoJS = require("crypto-js");
 
 app.get("/workers", db.getWorkers);
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 app.listen(process.env.PORT || port, () => {
   console.log(`App running on port ${port}.`);
 });

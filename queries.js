@@ -11,7 +11,7 @@ const pool = new Pool({
 var CryptoJS = require("crypto-js");
 
 const getWorkers = (request, response) => {
-  pool.query("select * from wokers", (error, results) => {
+  pool.query("select * from workers", (error, results) => {
     if (error) {
       throw error;
     }
