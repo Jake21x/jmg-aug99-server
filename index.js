@@ -36,24 +36,21 @@ dotenv.config();
 const fast = Fastify();
 
 import pg from "pg";
-const Pool = pg.Pool;
-const pool = new Pool({
-  user: process.env.User,
-  host: process.env.host,
-  database: process.env.Database,
-  password: process.env.Password,
-  port: 5432,
+
+const client = new pg.Client({
+  connectionString: process.env.URI,
+  ssl: { rejectUnauthorized: false },
 });
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const port = process.env.PORT_ONE || 4100;
 
-pool.query("SELECT NOW()", (err, res) => {
+client.query("SELECT NOW()", (err, res) => {
   console.log(`db connection status:`, { res, err });
 });
 
 fast.get("/", async (req, reply) => {
-  pool.query("SELECT now", (error, results) => {
+  client.query("SELECT now", (error, results) => {
     if (error) {
       throw error;
     }
