@@ -1,20 +1,14 @@
 var format = require("pg-format");
-
-const Pool = require("pg").Pool;
-const pool = new Pool({
-  user: process.env.User,
-  host: process.env.host,
-  database: process.env.Database,
-  password: process.env.Password,
-  port: process.env.Port,
-  ssl: true,
+const pg = require("pg");
+const client = new pg.Client({
+  connectionString: process.env.URI,
+  ssl: { rejectUnauthorized: false },
 });
 
-pool.connect();
-var CryptoJS = require("crypto-js");
+client.connect();
 
 const getWorkers = (request, response) => {
-  pool.query("select * from workers", (error, results) => {
+  client.query("select * from workers", (error, results) => {
     if (error) {
       throw error;
     }

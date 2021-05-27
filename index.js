@@ -1,63 +1,31 @@
-// // https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/
-// // https://devcenter.heroku.com/articles/heroku-cli
-// // https://github.com/heroku/heroku-builds
-// require("dotenv").config();
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const app = express();
-// const db = require("./queries");
-// var cors = require("cors");
-// const port = 5100;
+// https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/
+// https://devcenter.heroku.com/articles/heroku-cli
+// https://github.com/heroku/heroku-builds
+require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-// app.use(cors());
-// app.use(express.json());
+const CryptoJS = require("crypto-js");
+const db = require("./queries");
 
-// var CryptoJS = require("crypto-js");
+const app = express();
 
-// app.get("/workers", db.getWorkers);
+app.use(cors());
+app.use(express.json());
 
-// app.get("/", (request, response) => {
-//   var encrypt = CryptoJS.AES.encrypt("aug99", process.env.pkey).toString();
-//   response.json({
-//     info: "aug99",
-//     version: encrypt,
-//     raw: "aug99",
-//   });
-// });
+app.get("/workers", db.getWorkers);
 
-// app.listen(process.env.PORT || port, () => {
-//   console.log(`App running on port ${port}.`);
-// });
-
-import dotenv from "dotenv";
-import Fastify from "fastify";
-
-dotenv.config();
-const fast = Fastify();
-
-import pg from "pg";
-
-const client = new pg.Client({
-  connectionString: process.env.URI,
-  ssl: { rejectUnauthorized: false },
-});
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-const port = process.env.PORT_ONE || 4100;
-
-client.query("SELECT NOW()", (err, res) => {
-  console.log(`db connection status:`, { res, err });
-});
-
-fast.get("/", async (req, reply) => {
-  client.query("SELECT now", (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
+app.get("/", (request, response) => {
+  var encrypt = CryptoJS.AES.encrypt("aug99", process.env.pkey).toString();
+  response.json({
+    info: "aug99",
+    version: encrypt,
+    raw: "aug99",
   });
 });
 
-fast.listen(port, () => {
-  console.log("fastify running", port);
+const port = process.env.APPPORT || 4199;
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`);
 });
