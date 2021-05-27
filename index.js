@@ -16,6 +16,15 @@ var CryptoJS = require("crypto-js");
 
 app.get("/workers", db.getWorkers);
 
+app.get("/", (request, response) => {
+  var encrypt = CryptoJS.AES.encrypt("aug99", process.env.pkey).toString();
+  response.json({
+    info: "aug99",
+    version: encrypt,
+    raw: msg,
+  });
+});
+
 app.listen(process.env.PORT || port, () => {
   console.log(`App running on port ${port}.`);
 });

@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r dotenv/config index.js"
+    "start": "node -r dotenv/config index.js",
+    "deploy": "heroku builds:create -a jmg-aug99-server",
+    "logs": "heroku logs --tail --app jmg-aug99-server"
   },
   "author": "jakegarbo21@gmail.com",
   "license": "ISC",
