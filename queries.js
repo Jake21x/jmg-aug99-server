@@ -1,11 +1,11 @@
 var format = require("pg-format");
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: process.env.user,
+  user: process.env.User,
   host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-  port: process.env.port,
+  database: process.env.Database,
+  password: process.env.Password,
+  port: process.env.Port,
 });
 
 var CryptoJS = require("crypto-js");
