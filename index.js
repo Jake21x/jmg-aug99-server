@@ -25,6 +25,6 @@ app.get("/", (request, response) => {
   });
 });
 
-app.listen(4100, () => {
-  console.log(`App running on port 4100`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`App running on port 5000`);
 });
