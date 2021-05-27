@@ -21,7 +21,7 @@ app.get("/", (request, response) => {
   response.json({
     info: "aug99",
     version: encrypt,
-    raw: msg,
+    raw: "aug99",
   });
 });
 
